@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.model;
+package com.vladimir.bittrexclient.model.accountapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,7 +16,6 @@ public class Currency {
     private String coinType;
     private String baseAddress;
     private String notice;
-
 
 
     public String getCurrency() {

@@ -27,9 +27,9 @@ public class ApiResult<T> {
         return result;
     }
 
-    public Optional<T> getResultAsOptional() {
-        return Optional.ofNullable(result);
-    }
+//    public Optional<T> getResultAsOptional() {
+//        return Optional.ofNullable(result);
+//    }
 
     @Override
     public String toString() {

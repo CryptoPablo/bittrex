@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient;
+package com.vladimir.bittrexclient.util;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
