@@ -1,4 +1,5 @@
 package com.vladimir.bittrexclient.controller;
+import com.vladimir.bittrexclient.config.ApiCredentials;
 import com.vladimir.bittrexclient.util.ApiKeySigningUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -11,16 +12,17 @@ import org.springframework.web.client.RestTemplate;
 public class AppController {
     @Autowired
     private RestTemplate restTemplate;
-
-    private static final String apiKey = "ae490f442eca49509d9f2cf9deaeb05f";
-    private static final String apiSecret = "a19050a26d3942aabf91c84c114e4134";
+    @Autowired
+    private ApiCredentials apiCredentials;
     private static final String baseUrl = "https://api.bittrex.com/api/v1.1/";
 
     @RequestMapping("/open-orders")
     public String getAllOpenOrders(){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "market/getopenorders?apikey=" + apiKey + "&nonce=" + nonce;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
+        System.out.println(apiCredentials.getApiKey());
+        System.out.println(apiCredentials.getApiSecret());
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -29,8 +31,8 @@ public class AppController {
     @RequestMapping("/open-orders/{market}")
     public String getAllOpenOrders(@PathVariable (name = "market") String matket){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "market/getopenorders?apikey=" + apiKey + "&nonce=" + nonce + "&market="+matket;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&market="+matket;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -39,8 +41,8 @@ public class AppController {
     @RequestMapping("/balances")
     public String getAllBalances(){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getbalances?apikey=" + apiKey + "&nonce=" + nonce;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getbalances?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -49,8 +51,8 @@ public class AppController {
     @RequestMapping("/balances/{currency}")
     public String getBalanceByCurrency(@PathVariable (name = "currency") String currency){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getbalance?apikey=" + apiKey + "&nonce=" + nonce+"&currency="+currency;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getbalance?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce+"&currency="+currency;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -59,8 +61,8 @@ public class AppController {
     @RequestMapping("/order/{uuid}")
     public String getOrder(@PathVariable (name = "uuid") String uuid){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getorder?apikey=" + apiKey + "&nonce=" + nonce + "&uuid=" + uuid;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getorder?apikey=" + apiCredentials.getApiKey()+ "&nonce=" + nonce + "&uuid=" + uuid;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -69,8 +71,8 @@ public class AppController {
     @RequestMapping("/order-history")
     public String getOrdersHistory(){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getorderhistory?apikey=" + apiKey + "&nonce=" + nonce;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getorderhistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -79,8 +81,8 @@ public class AppController {
     @RequestMapping("/order-history/{market}")
     public String getOrdersHistoryByMarket(@PathVariable (name = "market") String market){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getorderhistory?apikey=" + apiKey + "&nonce=" + nonce + "&market=" + market;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getorderhistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&market=" + market;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -89,8 +91,8 @@ public class AppController {
     @RequestMapping("/withdrawal-history")
     public String getWithdrawalHistory(){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getwithdrawalhistory?apikey=" + apiKey + "&nonce=" + nonce;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getwithdrawalhistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -99,8 +101,8 @@ public class AppController {
     @RequestMapping("/withdrawal-history/{currency}")
     public String getWithdrawalHistoryByCurrency(@PathVariable (name = "currency") String currency){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getwithdrawalhistory?apikey=" + apiKey + "&nonce=" + nonce + "&currency=" + currency;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getwithdrawalhistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&currency=" + currency;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -109,8 +111,8 @@ public class AppController {
     @RequestMapping("/deposit-history")
     public String getDepositHistory(){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getdeposithistory?apikey=" + apiKey + "&nonce=" + nonce;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getdeposithistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         return responseEntity.getBody();
@@ -119,8 +121,8 @@ public class AppController {
     @RequestMapping("/deposit-history/{currency}")
     public String getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "account/getdeposithistory?apikey=" + apiKey + "&nonce=" + nonce + "&currency=" + currency;
-        String sign = ApiKeySigningUtil.createSign(uri, apiSecret);
+        String uri = baseUrl + "account/getdeposithistory?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&currency=" + currency;
+        String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         System.out.println(responseEntity.getBody());
