@@ -3,18 +3,24 @@ import com.vladimir.bittrexclient.config.ApiCredentials;
 import com.vladimir.bittrexclient.util.ApiKeySigningUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.client.RestTemplate;
 
-@RestController
+@Controller
 public class AppController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
     private ApiCredentials apiCredentials;
     private static final String baseUrl = "https://api.bittrex.com/api/v1.1/";
+
+    @RequestMapping("/")
+    public String home(){
+        return "index";
+    }
 
     @RequestMapping("/open-orders")
     public String getAllOpenOrders(){
@@ -27,7 +33,7 @@ public class AppController {
     }
 
     @RequestMapping("/open-orders/{market}")
-    public String getAllOpenOrdersByMarket(@PathVariable (name = "market") String market){
+    public String getAllOpenOrders(@PathVariable (name = "market") String market){
         String nonce = ApiKeySigningUtil.createNonce();
         String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&market="+market;
         String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
