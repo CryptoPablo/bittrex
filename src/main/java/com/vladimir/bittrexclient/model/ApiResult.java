@@ -27,7 +27,10 @@ public class ApiResult<T> {
         return result;
     }
 
-//    public Optional<T> getResultAsOptional() {
+    public void setResult(T result) {
+        this.result = result;
+    }
+    //    public Optional<T> getResultAsOptional() {
 //        return Optional.ofNullable(result);
 //    }
 

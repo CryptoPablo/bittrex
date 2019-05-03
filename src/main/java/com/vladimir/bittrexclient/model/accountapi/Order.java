@@ -1,42 +1,33 @@
 package com.vladimir.bittrexclient.model.accountapi;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Order {
 
-    private String accountId;
+    private String uuid;
     private String orderUuid;
     private String exchange;
-    private String type;
+    private String orderType;
     private BigDecimal quantity;
     private BigDecimal quantityRemaining;
     private BigDecimal limit;
-    private BigDecimal reserved;
-    private BigDecimal reserveRemaining;
-    private BigDecimal commissionReserved;
-    private BigDecimal commissionReserveRemaining;
     private BigDecimal commissionPaid;
     private BigDecimal price;
     private BigDecimal pricePerUnit;
     private LocalDateTime opened;
     private LocalDateTime closed;
-    private Boolean isOpen;
-    private String sentinel;
     private Boolean cancelInitiated;
     private Boolean immediateOrCancel;
     private Boolean isConditional;
-    private String condition;
-    private String conditionTarget;
 
-    public String getAccountId() {
-        return accountId;
+
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getOrderUuid() {
@@ -55,12 +46,12 @@ public class Order {
         this.exchange = exchange;
     }
 
-    public String getType() {
-        return type;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public BigDecimal getQuantity() {
@@ -85,38 +76,6 @@ public class Order {
 
     public void setLimit(BigDecimal limit) {
         this.limit = limit;
-    }
-
-    public BigDecimal getReserved() {
-        return reserved;
-    }
-
-    public void setReserved(BigDecimal reserved) {
-        this.reserved = reserved;
-    }
-
-    public BigDecimal getReserveRemaining() {
-        return reserveRemaining;
-    }
-
-    public void setReserveRemaining(BigDecimal reserveRemaining) {
-        this.reserveRemaining = reserveRemaining;
-    }
-
-    public BigDecimal getCommissionReserved() {
-        return commissionReserved;
-    }
-
-    public void setCommissionReserved(BigDecimal commissionReserved) {
-        this.commissionReserved = commissionReserved;
-    }
-
-    public BigDecimal getCommissionReserveRemaining() {
-        return commissionReserveRemaining;
-    }
-
-    public void setCommissionReserveRemaining(BigDecimal commissionReserveRemaining) {
-        this.commissionReserveRemaining = commissionReserveRemaining;
     }
 
     public BigDecimal getCommissionPaid() {
@@ -159,22 +118,6 @@ public class Order {
         this.closed = closed;
     }
 
-    public Boolean getIsOpen() {
-        return isOpen;
-    }
-
-    public void setIsOpen(Boolean open) {
-        isOpen = open;
-    }
-
-    public String getSentinel() {
-        return sentinel;
-    }
-
-    public void setSentinel(String sentinel) {
-        this.sentinel = sentinel;
-    }
-
     public Boolean getCancelInitiated() {
         return cancelInitiated;
     }
@@ -199,19 +142,24 @@ public class Order {
         isConditional = conditional;
     }
 
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public String getConditionTarget() {
-        return conditionTarget;
-    }
-
-    public void setConditionTarget(String conditionTarget) {
-        this.conditionTarget = conditionTarget;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "uuid='" + uuid + '\'' +
+                ", orderUuid='" + orderUuid + '\'' +
+                ", exchange='" + exchange + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", quantity=" + quantity +
+                ", quantityRemaining=" + quantityRemaining +
+                ", limit=" + limit +
+                ", commissionPaid=" + commissionPaid +
+                ", price=" + price +
+                ", pricePerUnit=" + pricePerUnit +
+                ", opened=" + opened +
+                ", closed=" + closed +
+                ", cancelInitiated=" + cancelInitiated +
+                ", immediateOrCancel=" + immediateOrCancel +
+                ", isConditional=" + isConditional +
+                '}';
     }
 }
