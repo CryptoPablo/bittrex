@@ -20,8 +20,6 @@ public class AppController {
     public String getAllOpenOrders(){
         String nonce = ApiKeySigningUtil.createNonce();
         String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce;
-        System.out.println(apiCredentials.getApiKey());
-        System.out.println(apiCredentials.getApiSecret());
         String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
@@ -29,9 +27,9 @@ public class AppController {
     }
 
     @RequestMapping("/open-orders/{market}")
-    public String getAllOpenOrders(@PathVariable (name = "market") String matket){
+    public String getAllOpenOrdersByMarket(@PathVariable (name = "market") String market){
         String nonce = ApiKeySigningUtil.createNonce();
-        String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&market="+matket;
+        String uri = baseUrl + "market/getopenorders?apikey=" + apiCredentials.getApiKey() + "&nonce=" + nonce + "&market="+market;
         String sign = ApiKeySigningUtil.createSign(uri, apiCredentials.getApiSecret());
         HttpEntity entity = setHeaders(sign);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);

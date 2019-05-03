@@ -16,6 +16,7 @@ HELP.md
 *.iws
 *.iml
 *.ipr
+src/main/resources/
 
 ### NetBeans ###
 /nbproject/private/
