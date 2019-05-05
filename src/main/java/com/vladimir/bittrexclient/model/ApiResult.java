@@ -1,7 +1,5 @@
 package com.vladimir.bittrexclient.model;
 
-import java.util.Optional;
-
 public class ApiResult<T> {
     private boolean success;
     private String message;
@@ -26,13 +24,6 @@ public class ApiResult<T> {
     public T getResult() {
         return result;
     }
-
-    public void setResult(T result) {
-        this.result = result;
-    }
-    //    public Optional<T> getResultAsOptional() {
-//        return Optional.ofNullable(result);
-//    }
 
     @Override
     public String toString() {

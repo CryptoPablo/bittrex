@@ -1,7 +1,5 @@
 package com.vladimir.bittrexclient.model.accountapi;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.math.BigDecimal;
 
 

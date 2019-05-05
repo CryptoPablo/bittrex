@@ -8,7 +8,7 @@ public class Balance {
     private BigDecimal balance;
     private BigDecimal available;
     private BigDecimal pending;
-    private String cryptoAddress;
+    private String CryptoAddress;
     private Boolean requested;
     private String uuid;
 
@@ -45,11 +45,11 @@ public class Balance {
     }
 
     public String getCryptoAddress() {
-        return cryptoAddress;
+        return CryptoAddress;
     }
 
     public void setCryptoAddress(String cryptoAddress) {
-        this.cryptoAddress = cryptoAddress;
+        this.CryptoAddress = cryptoAddress;
     }
 
     public Boolean getRequested() {
@@ -66,5 +66,18 @@ public class Balance {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "currency='" + currency + '\'' +
+                ", balance=" + balance +
+                ", available=" + available +
+                ", pending=" + pending +
+                ", cryptoAddress='" + CryptoAddress + '\'' +
+                ", requested=" + requested +
+                ", uuid='" + uuid + '\'' +
+                '}';
     }
 }
