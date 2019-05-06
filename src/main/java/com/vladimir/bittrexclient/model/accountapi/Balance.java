@@ -1,15 +1,23 @@
 package com.vladimir.bittrexclient.model.accountapi;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class Balance {
-
+    @JsonProperty("Currency")
     private String currency;
+    @JsonProperty("Balance")
     private BigDecimal balance;
+    @JsonProperty("Available")
     private BigDecimal available;
+    @JsonProperty("Pending")
     private BigDecimal pending;
-    private String CryptoAddress;
+    @JsonProperty("CryptoAddress")
+    private String cryptoAddress;
+    @JsonProperty("Requested")
     private Boolean requested;
+    @JsonProperty("Uuid")
     private String uuid;
 
     public String getCurrency() {
@@ -45,11 +53,11 @@ public class Balance {
     }
 
     public String getCryptoAddress() {
-        return CryptoAddress;
+        return cryptoAddress;
     }
 
     public void setCryptoAddress(String cryptoAddress) {
-        this.CryptoAddress = cryptoAddress;
+        this.cryptoAddress = cryptoAddress;
     }
 
     public Boolean getRequested() {
@@ -75,7 +83,7 @@ public class Balance {
                 ", balance=" + balance +
                 ", available=" + available +
                 ", pending=" + pending +
-                ", cryptoAddress='" + CryptoAddress + '\'' +
+                ", cryptoAddress='" + cryptoAddress + '\'' +
                 ", requested=" + requested +
                 ", uuid='" + uuid + '\'' +
                 '}';

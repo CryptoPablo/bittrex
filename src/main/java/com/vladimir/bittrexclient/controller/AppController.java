@@ -1,9 +1,10 @@
 package com.vladimir.bittrexclient.controller;
 
 import com.vladimir.bittrexclient.config.ApiCredentials;
-import com.vladimir.bittrexclient.model.ApiResult;
+import com.vladimir.bittrexclient.model.common.ApiResult;
 import com.vladimir.bittrexclient.util.ApiKeySigningUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.util.LinkedMultiValueMap;
@@ -25,7 +26,8 @@ public class AppController {
 
     @RequestMapping("/open-orders")
     public ApiResult getAllOpenOrders() {
-        return getApi(apiCredentials, "market", "getopenorders", null, null);
+        ApiResult apiResult = getApi(apiCredentials, "market", "getopenorders", null, null);
+        return apiResult;
     }
 
     @RequestMapping("/open-orders/{market}")
@@ -44,37 +46,37 @@ public class AppController {
     }
 
     @RequestMapping("/order/{uuid}")
-    public ApiResult getOrder(@PathVariable (name = "uuid") String uuid){
+    public ApiResult getOrder(@PathVariable(name = "uuid") String uuid) {
         return getApi(apiCredentials, "account", "getorder", "uuid", uuid);
     }
 
     @RequestMapping("/order-history")
-    public ApiResult getOrdersHistory(){
+    public ApiResult getOrdersHistory() {
         return getApi(apiCredentials, "account", "getorderhistory", null, null);
     }
 
     @RequestMapping("/order-history/{market}")
-    public ApiResult getOrdersHistoryByMarket(@PathVariable (name = "market") String market){
+    public ApiResult getOrdersHistoryByMarket(@PathVariable(name = "market") String market) {
         return getApi(apiCredentials, "account", "getorderhistory", "market", market);
     }
 
     @RequestMapping("/withdrawal-history")
-    public ApiResult getWithdrawalHistory(){
+    public ApiResult getWithdrawalHistory() {
         return getApi(apiCredentials, "account", "getwithdrawalhistory", null, null);
     }
 
     @RequestMapping("/withdrawal-history/{currency}")
-    public ApiResult getWithdrawalHistoryByCurrency(@PathVariable (name = "currency") String currency){
+    public ApiResult getWithdrawalHistoryByCurrency(@PathVariable(name = "currency") String currency) {
         return getApi(apiCredentials, "account", "getwithdrawalhistory", "currency", currency);
     }
 
     @RequestMapping("/deposit-history")
-    public ApiResult getDepositHistory(){
+    public ApiResult getDepositHistory() {
         return getApi(apiCredentials, "account", "getdeposithistory", null, null);
     }
 
     @RequestMapping("/deposit-history/{currency}")
-    public ApiResult getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency){
+    public ApiResult getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency) {
         return getApi(apiCredentials, "account", "getdeposithistory", "currency", currency);
     }
 
@@ -82,6 +84,7 @@ public class AppController {
                              @Nullable String parameter,
                              @Nullable String value) {
         String uri = baseUrl + "/" + apiType + "/" + method;
+        ;
         String nonce = ApiKeySigningUtil.createNonce();
 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
@@ -102,8 +105,8 @@ public class AppController {
         HttpEntity entity = new HttpEntity(httpHeaders);
 
         ResponseEntity<ApiResult> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,
-                ApiResult.class);
-
+                new ParameterizedTypeReference<ApiResult>() {
+                });
         return responseEntity.getBody();
     }
 }

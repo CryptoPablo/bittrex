@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.model;
+package com.vladimir.bittrexclient.model.common;
 
 public class ApiResult<T> {
     private boolean success;
