@@ -26,8 +26,7 @@ public class AppController {
 
     @RequestMapping("/open-orders")
     public ApiResult getAllOpenOrders() {
-        ApiResult apiResult = getApi(apiCredentials, "market", "getopenorders", null, null);
-        return apiResult;
+        return getApi(apiCredentials, "market", "getopenorders", null, null);
     }
 
     @RequestMapping("/open-orders/{market}")
