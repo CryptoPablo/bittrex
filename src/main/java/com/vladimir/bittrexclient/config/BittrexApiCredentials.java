@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:application.properties")
 @ConfigurationProperties(prefix = "api")
-public class ApiCredentials {
+public class BittrexApiCredentials {
 
     private String apiKey;
 

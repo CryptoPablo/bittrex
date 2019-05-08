@@ -1,6 +1,6 @@
 package com.vladimir.bittrexclient.model;
 
-public class ApiResult<T> {
+public class BittrexResult<T> {
     private boolean success;
     private String message;
     private T result;
@@ -27,7 +27,7 @@ public class ApiResult<T> {
 
     @Override
     public String toString() {
-        return "ApiResult{" +
+        return "BittrexResult{" +
                 "success=" + success +
                 ", message='" + message + '\'' +
                 ", result=" + result +
