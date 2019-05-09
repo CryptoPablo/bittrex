@@ -25,12 +25,4 @@ public class BittrexResult<T> {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "BittrexResult{" +
-                "success=" + success +
-                ", message='" + message + '\'' +
-                ", result=" + result +
-                '}';
-    }
 }

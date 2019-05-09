@@ -1,5 +1,7 @@
 package com.vladimir.bittrexclient.controller;
 
+import com.google.common.reflect.TypeToken;
+import com.vladimir.bittrexclient.model.bittrexmodel.*;
 import com.vladimir.bittrexclient.model.BittrexResult;
 import com.vladimir.bittrexclient.service.BittrexConsumerService;
 import com.vladimir.bittrexclient.config.BittrexApiCredentials;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class AppController {
     @Autowired
@@ -15,59 +19,59 @@ public class AppController {
     @Autowired
     private BittrexApiCredentials bittrexApiCredentials;
 
-    @RequestMapping("/open-orders")
-    public BittrexResult getAllOpenOrders() {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "market", "getopenorders", null, null);
-    }
-
-    @RequestMapping("/open-orders/{market}")
-    public BittrexResult getAllOpenOrdersByMarket(@PathVariable(name = "market") String market) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "market", "getopenorders", "market", market);
-    }
-
     @RequestMapping("/balances")
-    public BittrexResult getAllBalances() {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null);
+    public BittrexResult<List<Balance>> getAllBalances() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>(){});
     }
 
     @RequestMapping("/balances/{currency}")
-    public BittrexResult getBalanceByCurrency(@PathVariable(name = "currency") String currency) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalance", "currency", currency);
+    public BittrexResult<Balance> getBalanceByCurrency(@PathVariable(name = "currency") String currency) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalance", "currency", currency, new TypeToken<Balance>(){});
     }
 
     @RequestMapping("/order/{uuid}")
-    public BittrexResult getOrder(@PathVariable(name = "uuid") String uuid) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorder", "uuid", uuid);
+    public BittrexResult<Order> getOrder(@PathVariable(name = "uuid") String uuid) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorder", "uuid", uuid, new TypeToken<Order>() {});
+    }
+
+    @RequestMapping("/open-orders")
+    public BittrexResult<List<Order>> getAllOpenOrders() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "market", "getopenorders", null, null, new TypeToken<List<Order>>(){});
+    }
+
+    @RequestMapping("/open-orders/{market}")
+    public BittrexResult<List<Order>> getAllOpenOrdersByMarket(@PathVariable(name = "market") String market) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "market", "getopenorders", "market", market, new TypeToken<List<Order>>(){});
     }
 
     @RequestMapping("/order-history")
-    public BittrexResult getOrderHistory() {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorderhistory", null, null);
+    public BittrexResult<List<OrderHistoryEntry>> getOrderHistory() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorderhistory", null, null, new TypeToken<List<OrderHistoryEntry>>() {});
     }
 
     @RequestMapping("/order-history/{market}")
-    public BittrexResult getOrderHistoryByMarket(@PathVariable(name = "market") String market) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorderhistory", "market", market);
+    public BittrexResult<List<OrderHistoryEntry>> getOrderHistoryByMarket(@PathVariable(name = "market") String market) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getorderhistory", "market", market, new TypeToken<List<OrderHistoryEntry>>() {});
     }
 
     @RequestMapping("/withdrawal-history")
-    public BittrexResult getWithdrawalHistory() {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getwithdrawalhistory", null, null);
+    public BittrexResult<List<WithdrawalHistoryEntry>> getWithdrawalHistory() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getwithdrawalhistory", null, null, new TypeToken<List<WithdrawalHistoryEntry>>() {});
     }
 
     @RequestMapping("/withdrawal-history/{currency}")
-    public BittrexResult getWithdrawalHistoryByCurrency(@PathVariable(name = "currency") String currency) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getwithdrawalhistory", "currency", currency);
+    public BittrexResult<List<WithdrawalHistoryEntry>> getWithdrawalHistoryByCurrency(@PathVariable(name = "currency") String currency) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getwithdrawalhistory", "currency", currency, new TypeToken<List<WithdrawalHistoryEntry>>() {});
     }
 
     @RequestMapping("/deposit-history")
-    public BittrexResult getDepositHistory() {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", null, null);
+    public BittrexResult<List<DepositHistoryEntry>> getDepositHistory() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", null, null, new TypeToken<List<DepositHistoryEntry>>() {});
     }
 
     @RequestMapping("/deposit-history/{currency}")
-    public BittrexResult getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency) {
-        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", "currency", currency);
+    public BittrexResult<List<DepositHistoryEntry>> getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency) {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", "currency", currency, new TypeToken<List<DepositHistoryEntry>>() {});
     }
 }
 

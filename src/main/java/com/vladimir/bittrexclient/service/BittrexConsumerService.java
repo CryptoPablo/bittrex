@@ -1,10 +1,14 @@
 package com.vladimir.bittrexclient.service;
 
+import com.google.common.reflect.TypeParameter;
+import com.google.common.reflect.TypeToken;
 import com.vladimir.bittrexclient.config.BittrexApiCredentials;
 import com.vladimir.bittrexclient.model.BittrexResult;
 import com.vladimir.bittrexclient.util.ApiKeySigningUtil;
 import com.vladimir.bittrexclient.util.CutstomResponseErrorHandler;
+import com.vladimir.bittrexclient.util.ParameterizedTypeReferenceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,7 @@ public class BittrexConsumerService {
     private RestTemplate restTemplate;
     private static final String baseUrl = "https://api.bittrex.com/api/v1.1/";
 
-    public BittrexResult makeRequest(BittrexApiCredentials bittrexApiCredentials, String apiType, String method, @Nullable String parameter, @Nullable String value) {
+    public <T> BittrexResult<T> makeRequest(BittrexApiCredentials bittrexApiCredentials, String apiType, String method, @Nullable String parameter, @Nullable String value, TypeToken<T> type) {
         String uri = baseUrl + "/" + apiType + "/" + method;
         String nonce = ApiKeySigningUtil.createNonce();
 
@@ -37,10 +41,13 @@ public class BittrexConsumerService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("apisign", sign);
         httpHeaders.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-
         HttpEntity entity = new HttpEntity(httpHeaders);
+
         restTemplate.setErrorHandler(new CutstomResponseErrorHandler());
-        ResponseEntity<BittrexResult> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, BittrexResult.class);
+
+        ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {}.where(new TypeParameter<>() {}, type));
+
+        ResponseEntity<BittrexResult<T>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseTypeRef);
 
         return responseEntity.getBody();
     }

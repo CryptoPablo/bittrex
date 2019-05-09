@@ -16,8 +16,8 @@ public class CutstomResponseErrorHandler implements ResponseErrorHandler {
     private Logger logger = LoggerFactory.getLogger(CutstomResponseErrorHandler.class);
 
     @Override
-    public boolean hasError(ClientHttpResponse httpResponse)
-            throws IOException {
+    public boolean hasError(ClientHttpResponse httpResponse) throws IOException {
+
         return (httpResponse
                 .getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR || httpResponse
@@ -26,8 +26,7 @@ public class CutstomResponseErrorHandler implements ResponseErrorHandler {
     }
 
     @Override
-    public void handleError(ClientHttpResponse httpResponse)
-            throws IOException {
+    public void handleError(ClientHttpResponse httpResponse) throws IOException {
 
         if (httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR) {
             logger.error("Response error: {} {}", httpResponse.getStatusCode(), httpResponse.getStatusText());

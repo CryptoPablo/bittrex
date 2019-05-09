@@ -18,4 +18,5 @@ public class BittrexClientApplication {
         SpringApplication.run(BittrexClientApplication.class, args);
     }
 
+
 }
