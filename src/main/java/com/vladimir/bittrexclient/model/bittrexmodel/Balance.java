@@ -1,10 +1,7 @@
 package com.vladimir.bittrexclient.model.bittrexmodel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
-
 
 public class Balance {
     @JsonProperty("Currency")

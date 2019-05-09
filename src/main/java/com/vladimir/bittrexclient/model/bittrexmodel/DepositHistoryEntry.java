@@ -3,7 +3,7 @@ package com.vladimir.bittrexclient.model.bittrexmodel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DepositHistoryEntry {
     @JsonProperty("Id")
@@ -15,7 +15,7 @@ public class DepositHistoryEntry {
     @JsonProperty("Confirmations")
     private long confirmations;
     @JsonProperty("LastUpdated")
-    private LocalDateTime lastUpdated;
+    private Date lastUpdated;
     @JsonProperty("TxID")
     private String txId;
     @JsonProperty("CryptoAddress")
@@ -53,11 +53,11 @@ public class DepositHistoryEntry {
         this.confirmations = confirmations;
     }
 
-    public LocalDateTime getLastUpdated() {
+    public Date getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {
+    public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 

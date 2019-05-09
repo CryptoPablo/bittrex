@@ -1,9 +1,11 @@
 package com.vladimir.bittrexclient.model.bittrexmodel;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 
-import java.time.LocalDateTime;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WithdrawalHistoryEntry {
     @JsonProperty("PaymentUuid")
     private String paymentUuid;
@@ -14,7 +16,7 @@ public class WithdrawalHistoryEntry {
     @JsonProperty("Address")
     private String address;
     @JsonProperty("Opened")
-    private LocalDateTime opened;
+    private Date opened;
     @JsonProperty("Authorized")
     private Boolean authorized;
     @JsonProperty("PendingPayment")
@@ -60,11 +62,11 @@ public class WithdrawalHistoryEntry {
         this.address = address;
     }
 
-    public LocalDateTime getOpened() {
+    public Date getOpened() {
         return opened;
     }
 
-    public void setOpened(LocalDateTime opened) {
+    public void setOpened(Date opened) {
         this.opened = opened;
     }
 
@@ -114,5 +116,22 @@ public class WithdrawalHistoryEntry {
 
     public void setInvalidAddress(Boolean invalidAddress) {
         this.invalidAddress = invalidAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "WithdrawalHistoryEntry{" +
+                "paymentUuid='" + paymentUuid + '\'' +
+                ", currency='" + currency + '\'' +
+                ", amount='" + amount + '\'' +
+                ", address='" + address + '\'' +
+                ", opened=" + opened +
+                ", authorized=" + authorized +
+                ", pendingPayment=" + pendingPayment +
+                ", txCost=" + txCost +
+                ", txId='" + txId + '\'' +
+                ", canceled=" + canceled +
+                ", invalidAddress=" + invalidAddress +
+                '}';
     }
 }

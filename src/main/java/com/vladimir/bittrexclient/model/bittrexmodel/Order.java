@@ -3,7 +3,7 @@ package com.vladimir.bittrexclient.model.bittrexmodel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Order {
     @JsonProperty("OrderUuid")
@@ -25,9 +25,9 @@ public class Order {
     @JsonProperty("PricePerUnit")
     private BigDecimal pricePerUnit;
     @JsonProperty("Opened")
-    private LocalDateTime opened;
+    private Date opened;
     @JsonProperty("Closed")
-    private LocalDateTime closed;
+    private Date closed;
     @JsonProperty("CancelInitiated")
     private boolean cancelInitiated;
     @JsonProperty("ImmediateOrCancel")
@@ -107,19 +107,19 @@ public class Order {
         this.pricePerUnit = pricePerUnit;
     }
 
-    public LocalDateTime getOpened() {
+    public Date getOpened() {
         return opened;
     }
 
-    public void setOpened(LocalDateTime opened) {
+    public void setOpened(Date opened) {
         this.opened = opened;
     }
 
-    public LocalDateTime getClosed() {
+    public Date getClosed() {
         return closed;
     }
 
-    public void setClosed(LocalDateTime closed) {
+    public void setClosed(Date closed) {
         this.closed = closed;
     }
 

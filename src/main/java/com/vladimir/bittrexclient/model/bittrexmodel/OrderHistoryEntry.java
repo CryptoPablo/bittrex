@@ -3,7 +3,7 @@ package com.vladimir.bittrexclient.model.bittrexmodel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class OrderHistoryEntry {
     @JsonProperty("OrderUuid")
@@ -11,7 +11,7 @@ public class OrderHistoryEntry {
     @JsonProperty("Exchange")
     private String exchange;
     @JsonProperty("Timestamp")
-    private LocalDateTime timeSatamp;
+    private Date timeSatamp;
     @JsonProperty("OrderType")
     private String orderType;
     @JsonProperty("Limit")
@@ -47,11 +47,11 @@ public class OrderHistoryEntry {
         this.exchange = exchange;
     }
 
-    public LocalDateTime getTimeSatamp() {
+    public Date getTimeSatamp() {
         return timeSatamp;
     }
 
-    public void setTimeSatamp(LocalDateTime timeSatamp) {
+    public void setTimeSatamp(Date timeSatamp) {
         this.timeSatamp = timeSatamp;
     }
 

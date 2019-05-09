@@ -1,9 +1,12 @@
 package com.vladimir.bittrexclient.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeParameter;
 import com.google.common.reflect.TypeToken;
 import com.vladimir.bittrexclient.config.BittrexApiCredentials;
 import com.vladimir.bittrexclient.model.BittrexResult;
+import com.vladimir.bittrexclient.model.bittrexmodel.WithdrawalHistoryEntry;
 import com.vladimir.bittrexclient.util.ApiKeySigningUtil;
 import com.vladimir.bittrexclient.util.CutstomResponseErrorHandler;
 import com.vladimir.bittrexclient.util.ParameterizedTypeReferenceBuilder;
@@ -45,10 +48,13 @@ public class BittrexConsumerService {
 
         restTemplate.setErrorHandler(new CutstomResponseErrorHandler());
 
-        ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {}.where(new TypeParameter<>() {}, type));
+        ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {
+        }.where(new TypeParameter<>() {
+        }, type));
 
         ResponseEntity<BittrexResult<T>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseTypeRef);
 
         return responseEntity.getBody();
     }
+
 }
