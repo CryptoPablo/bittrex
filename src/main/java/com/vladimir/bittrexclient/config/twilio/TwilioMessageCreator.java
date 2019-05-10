@@ -15,12 +15,11 @@ public class TwilioMessageCreator {
         this.client = client;
     }
 
-    public void create(String to, String from, String body, String mediaUrl) {
+    public void create(String to, String from, String body) {
         MessageCreator messageCreator = new MessageCreator(
                 new PhoneNumber(to),
                 new PhoneNumber(from),
                 body);
-        messageCreator.setMediaUrl(mediaUrl);
         try {
             messageCreator.create(this.client);
         } catch (TwilioException e) {
