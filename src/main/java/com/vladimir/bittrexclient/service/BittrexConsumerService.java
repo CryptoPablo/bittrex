@@ -45,9 +45,7 @@ public class BittrexConsumerService {
 
         restTemplate.setErrorHandler(new CutstomResponseErrorHandler());
 
-        ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {
-        }.where(new TypeParameter<>() {
-        }, type));
+        ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {}.where(new TypeParameter<>() {}, type));
 
         ResponseEntity<BittrexResult<T>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseTypeRef);
 
