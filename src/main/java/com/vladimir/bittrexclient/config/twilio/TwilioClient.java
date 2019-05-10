@@ -1,8 +1,12 @@
 package com.vladimir.bittrexclient.config.twilio;
 
 import com.twilio.http.TwilioRestClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwilioClient {
+
     private TwilioApiCredentials credentials;
     private TwilioMessageCreator messageCreator;
 
