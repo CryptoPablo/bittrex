@@ -11,7 +11,6 @@ public class ParameterizedTypeReferenceBuilder {
     }
 
     private static class TypeTokenParameterizedTypeReference<T> extends ParameterizedTypeReference<T> {
-
         private final Type type;
 
         private TypeTokenParameterizedTypeReference(TypeToken<T> typeToken) {
@@ -25,8 +24,7 @@ public class ParameterizedTypeReferenceBuilder {
 
         @Override
         public boolean equals(Object obj) {
-            return (this == obj || (obj instanceof ParameterizedTypeReference &&
-                    this.type.equals(((ParameterizedTypeReference<?>) obj).getType())));
+            return (this == obj || (obj instanceof ParameterizedTypeReference && this.type.equals(((ParameterizedTypeReference<?>) obj).getType())));
         }
 
         @Override
@@ -38,6 +36,5 @@ public class ParameterizedTypeReferenceBuilder {
         public String toString() {
             return "ParameterizedTypeReference<" + this.type + ">";
         }
-
     }
 }
