@@ -1,35 +1,39 @@
-package com.vladimir.bittrexclient.model.bittrexmodel;
+package com.vladimir.bittrexclient.model.bittrex;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderHistoryEntry {
+public class Order {
     @JsonProperty("OrderUuid")
     private String orderUuid;
     @JsonProperty("Exchange")
     private String exchange;
-    @JsonProperty("Timestamp")
-    private Date timeSatamp;
     @JsonProperty("OrderType")
     private String orderType;
-    @JsonProperty("Limit")
-    private BigDecimal limit;
     @JsonProperty("Quantity")
     private BigDecimal quantity;
     @JsonProperty("QuantityRemaining")
     private BigDecimal quantityRemaining;
-    @JsonProperty("Commission")
-    private BigDecimal commission;
+    @JsonProperty("Limit")
+    private BigDecimal limit;
+    @JsonProperty("CommissionPaid")
+    private BigDecimal commissionPaid;
     @JsonProperty("Price")
     private BigDecimal price;
     @JsonProperty("PricePerUnit")
-    private BigDecimal pircePerUnit;
-    @JsonProperty("IsConditional")
-    private boolean isConditional;
+    private BigDecimal pricePerUnit;
+    @JsonProperty("Opened")
+    private Date opened;
+    @JsonProperty("Closed")
+    private Date closed;
+    @JsonProperty("CancelInitiated")
+    private boolean cancelInitiated;
     @JsonProperty("ImmediateOrCancel")
     private boolean immediateOrCancel;
+    @JsonProperty("IsConditional")
+    private boolean isConditional;
 
     public String getOrderUuid() {
         return orderUuid;
@@ -47,28 +51,12 @@ public class OrderHistoryEntry {
         this.exchange = exchange;
     }
 
-    public Date getTimeSatamp() {
-        return timeSatamp;
-    }
-
-    public void setTimeSatamp(Date timeSatamp) {
-        this.timeSatamp = timeSatamp;
-    }
-
     public String getOrderType() {
         return orderType;
     }
 
     public void setOrderType(String orderType) {
         this.orderType = orderType;
-    }
-
-    public BigDecimal getLimit() {
-        return limit;
-    }
-
-    public void setLimit(BigDecimal limit) {
-        this.limit = limit;
     }
 
     public BigDecimal getQuantity() {
@@ -87,12 +75,20 @@ public class OrderHistoryEntry {
         this.quantityRemaining = quantityRemaining;
     }
 
-    public BigDecimal getCommission() {
-        return commission;
+    public BigDecimal getLimit() {
+        return limit;
     }
 
-    public void setCommission(BigDecimal commission) {
-        this.commission = commission;
+    public void setLimit(BigDecimal limit) {
+        this.limit = limit;
+    }
+
+    public BigDecimal getCommissionPaid() {
+        return commissionPaid;
+    }
+
+    public void setCommissionPaid(BigDecimal commissionPaid) {
+        this.commissionPaid = commissionPaid;
     }
 
     public BigDecimal getPrice() {
@@ -103,20 +99,36 @@ public class OrderHistoryEntry {
         this.price = price;
     }
 
-    public BigDecimal getPircePerUnit() {
-        return pircePerUnit;
+    public BigDecimal getPricePerUnit() {
+        return pricePerUnit;
     }
 
-    public void setPircePerUnit(BigDecimal pircePerUnit) {
-        this.pircePerUnit = pircePerUnit;
+    public void setPricePerUnit(BigDecimal pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
-    public boolean isConditional() {
-        return isConditional;
+    public Date getOpened() {
+        return opened;
     }
 
-    public void setConditional(boolean conditional) {
-        isConditional = conditional;
+    public void setOpened(Date opened) {
+        this.opened = opened;
+    }
+
+    public Date getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Date closed) {
+        this.closed = closed;
+    }
+
+    public boolean isCancelInitiated() {
+        return cancelInitiated;
+    }
+
+    public void setCancelInitiated(boolean cancelInitiated) {
+        this.cancelInitiated = cancelInitiated;
     }
 
     public boolean isImmediateOrCancel() {
@@ -125,5 +137,13 @@ public class OrderHistoryEntry {
 
     public void setImmediateOrCancel(boolean immediateOrCancel) {
         this.immediateOrCancel = immediateOrCancel;
+    }
+
+    public boolean isConditional() {
+        return isConditional;
+    }
+
+    public void setConditional(boolean conditional) {
+        isConditional = conditional;
     }
 }

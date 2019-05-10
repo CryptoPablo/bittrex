@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.config;
+package com.vladimir.bittrexclient.config.bittrex;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.model.bittrexmodel;
+package com.vladimir.bittrexclient.model.bittrex;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;

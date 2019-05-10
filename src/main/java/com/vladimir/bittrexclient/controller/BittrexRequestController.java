@@ -1,10 +1,10 @@
 package com.vladimir.bittrexclient.controller;
 
 import com.google.common.reflect.TypeToken;
-import com.vladimir.bittrexclient.model.bittrexmodel.*;
+import com.vladimir.bittrexclient.model.bittrex.*;
 import com.vladimir.bittrexclient.model.BittrexResult;
 import com.vladimir.bittrexclient.service.BittrexConsumerService;
-import com.vladimir.bittrexclient.config.BittrexApiCredentials;
+import com.vladimir.bittrexclient.config.bittrex.BittrexApiCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-public class AppController {
+public class BittrexRequestController {
     @Autowired
     private BittrexConsumerService bittrexConsumerService;
     @Autowired

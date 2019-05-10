@@ -1,6 +1,6 @@
-package com.vladimir.bittrexclient.config;
+package com.vladimir.bittrexclient.config.telegram;
 
-public class BotCredentials {
+public class TelegramBotCredentials {
     private String name;
     private String token;
 
