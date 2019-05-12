@@ -8,9 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.properties")
 @ConfigurationProperties(prefix = "bittrex")
 public class BittrexApiCredentials {
-
     private String apiKey;
-
     private String apiSecret;
 
     public String getApiKey() {

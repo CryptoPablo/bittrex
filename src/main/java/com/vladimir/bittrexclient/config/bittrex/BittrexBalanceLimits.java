@@ -15,7 +15,7 @@ public class BittrexBalanceLimits {
     @Value("#{${bittrex.balance.limits}}")
     private Map<String, BigDecimal> limit;
 
-    public Map<String, BigDecimal> getCurrentLimits() {
+    public Map<String, BigDecimal> getLimits() {
         return limit;
     }
 }
