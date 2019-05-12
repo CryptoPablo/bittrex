@@ -1,7 +1,6 @@
 package com.vladimir.bittrexclient.controller;
 
 import com.google.common.reflect.TypeToken;
-import com.vladimir.bittrexclient.config.twilio.TwilioApiCredentials;
 import com.vladimir.bittrexclient.model.bittrex.*;
 import com.vladimir.bittrexclient.model.BittrexResult;
 import com.vladimir.bittrexclient.service.BittrexConsumerService;
@@ -21,14 +20,11 @@ public class BittrexRequestController {
     private BittrexConsumerService bittrexConsumerService;
     @Autowired
     private BittrexApiCredentials bittrexApiCredentials;
-    @Autowired
-    private TwilioNotificationService twilioNotificationService;
+
     @RequestMapping("/balances")
-    public List<Balance> getAllBalances() {
-        List<Balance> result = bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
-        }).getResult();
-        twilioNotificationService.sendNotification(result);
-        return result;
+    public BittrexResult<List<Balance>> getAllBalances() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
+        });
     }
 
     @RequestMapping("/balances/{currency}")

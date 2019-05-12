@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-@ConfigurationProperties(prefix = "api")
+@ConfigurationProperties(prefix = "bittrex")
 public class BittrexApiCredentials {
 
     private String apiKey;

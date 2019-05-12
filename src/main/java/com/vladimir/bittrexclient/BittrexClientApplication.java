@@ -1,6 +1,7 @@
 package com.vladimir.bittrexclient;
 
 import com.vladimir.bittrexclient.config.bittrex.BittrexApiCredentials;
+import com.vladimir.bittrexclient.config.bittrex.BittrexBalanceLimits;
 import com.vladimir.bittrexclient.config.twilio.TwilioApiCredentials;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableConfigurationProperties({BittrexApiCredentials.class, TwilioApiCredentials.class})
-
+@EnableConfigurationProperties({BittrexApiCredentials.class, TwilioApiCredentials.class, BittrexBalanceLimits.class})
 public class BittrexClientApplication {
     @Bean
     public RestTemplate getRestTemplate(){

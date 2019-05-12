@@ -6,20 +6,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TwilioClient {
-
     private TwilioApiCredentials credentials;
     private TwilioMessageCreator messageCreator;
-
-    public TwilioClient() {
-        this.credentials = new TwilioApiCredentials();
+    @Autowired
+    public TwilioClient(TwilioApiCredentials twilioApiCredentials) {
+        this.credentials = twilioApiCredentials;
         this.messageCreator = new TwilioMessageCreator(
                 new TwilioRestClient.Builder(credentials.getAccountSid(), credentials.getAuthToken()).build()
         );
-    }
-
-    public TwilioClient(TwilioMessageCreator messageCreator, TwilioApiCredentials credentials) {
-        this.credentials = credentials;
-        this.messageCreator = messageCreator;
     }
 
     public void sendMessage(String to, String message) {
