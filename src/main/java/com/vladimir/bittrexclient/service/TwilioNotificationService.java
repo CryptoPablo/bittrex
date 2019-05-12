@@ -20,8 +20,7 @@ public class TwilioNotificationService {
     public void sendNotification(List<Balance> balanceList) {
         for (Balance balance : balanceList) {
             if (balanceLowerThanLimit(balance, bittrexBalanceLimits)) {
-                System.out.println(generateMessage(balance));
-                twilioClient.sendMessage("+380636578411", generateMessage(balance));
+                twilioClient.sendMessage("", generateMessage(balance));
             }
         }
     }
