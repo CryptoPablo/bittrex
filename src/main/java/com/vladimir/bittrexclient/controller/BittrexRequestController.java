@@ -20,16 +20,12 @@ public class BittrexRequestController {
     private BittrexConsumerService bittrexConsumerService;
     @Autowired
     private BittrexApiCredentials bittrexApiCredentials;
-    @Autowired
-    private TwilioNotificationService twilioNotificationService;
+
 
     @RequestMapping("/balances")
     public BittrexResult<List<Balance>> getAllBalances() {
-        BittrexResult<List<Balance>> result = bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
+        return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
         });
-        List<Balance> balances = result.getResult();
-        twilioNotificationService.sendNotification(balances);
-        return result;
     }
 
     @RequestMapping("/balances/{currency}")

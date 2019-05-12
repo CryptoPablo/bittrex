@@ -14,11 +14,11 @@ import java.util.Map;
 @Service
 public class TwilioNotificationService {
     @Autowired
-    private BittrexBalanceLimits bittrexBalanceLimits;
+    private TwilioClient twilioClient;
     @Autowired
     private TwilioReceivers twilioReceivers;
     @Autowired
-    private TwilioClient twilioClient;
+    private BittrexBalanceLimits bittrexBalanceLimits;
 
     public void sendNotification(List<Balance> balanceList) {
         for (Balance balance : balanceList) {
@@ -41,7 +41,7 @@ public class TwilioNotificationService {
     }
 
     private String generateMessage(Balance balance) {
-        return balance.getCurrency() + " balance is " + balance.getBalance() + "\n"
-                + "\n" + "Please refill address: " + balance.getCryptoAddress();
+        return balance.getCurrency() + " balance is " + balance.getBalance() + "\n" +
+                "\n" + "Please refill address: " + balance.getCryptoAddress();
     }
 }
