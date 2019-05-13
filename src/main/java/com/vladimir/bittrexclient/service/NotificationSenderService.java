@@ -31,11 +31,11 @@ public class NotificationSenderService {
         }
     }
 
-    private boolean isAddressRefilled(List<Balance> actualBalances, List<Balance> balancesWithLowLimit) {
+    private boolean isAddressRefilled(List<Balance> actualBalances, List<Balance> lowLimitBalances) {
         boolean refilled = false;
         for (Balance actualBalance : actualBalances) {
-            for (Balance balanceWithLowLimit : balancesWithLowLimit) {
-                if (actualBalance.getBalance().compareTo(balanceWithLowLimit.getBalance()) > 0) {
+            for (Balance lowLimitBalance : lowLimitBalances) {
+                if (actualBalance.getBalance().compareTo(lowLimitBalance.getBalance()) > 0) {
                     refilled = true;
                 }
             }

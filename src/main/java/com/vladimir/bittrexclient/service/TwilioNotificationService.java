@@ -21,10 +21,10 @@ public class TwilioNotificationService {
     @Autowired
     private BittrexBalanceLimits bittrexBalanceLimits;
 
-    public void sendNotification(List<Balance> lowLimitBalances) {
-        for (Balance lowLimitBalance : lowLimitBalances) {
+    public void sendNotification(List<Balance> balanceList) {
+        for (Balance balance : balanceList) {
             for (String receiver : twilioReceivers.getAllReceivers()) {
-                twilioClient.sendMessage(receiver, generateMessage(lowLimitBalance));
+                twilioClient.sendMessage(receiver, generateMessage(balance));
             }
         }
     }
