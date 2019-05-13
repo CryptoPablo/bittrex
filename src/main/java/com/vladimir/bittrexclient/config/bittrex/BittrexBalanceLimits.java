@@ -11,9 +11,9 @@ import java.util.Map;
 @ConfigurationProperties("bittrex.balance.limits")
 public class BittrexBalanceLimits {
     @Value("#{${bittrex.balance.limits}}")
-    private Map<String, BigDecimal> limit;
+    private Map<String, BigDecimal> establishedLimits;
 
     public Map<String, BigDecimal> getLimits() {
-        return limit;
+        return establishedLimits;
     }
 }
