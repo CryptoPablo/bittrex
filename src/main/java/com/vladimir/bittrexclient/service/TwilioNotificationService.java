@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,20 +21,28 @@ public class TwilioNotificationService {
     @Autowired
     private BittrexBalanceLimits bittrexBalanceLimits;
 
-    public void sendNotification(List<Balance> balanceList) {
-        for (Balance balance : balanceList) {
-            if (balanceLowerThanLimit(balance, bittrexBalanceLimits)) {
-                for (String receiver : twilioReceivers.getAllReceivers()) {
-                    twilioClient.sendMessage(receiver, generateMessage(balance));
-                }
+    public void sendNotification(List<Balance> lowLimitBalances) {
+        for (Balance lowLimitBalance : lowLimitBalances) {
+            for (String receiver : twilioReceivers.getAllReceivers()) {
+                twilioClient.sendMessage(receiver, generateMessage(lowLimitBalance));
             }
         }
     }
 
-    private static boolean balanceLowerThanLimit(Balance balance, BittrexBalanceLimits limits) {
-        Map<String, BigDecimal> limit = limits.getLimits();
-        for (String currency : limit.keySet()) {
-            if (balance.getCurrency().equals(currency) && balance.getBalance().compareTo(limit.get(currency)) < 0) {
+    public List<Balance> findLowLimitBalances(List<Balance> actualBalances) {
+        List<Balance> lowLimitBalances = new ArrayList<>();
+        for (Balance actualBalance : actualBalances) {
+            if (balanceLowerThanLimit(actualBalance, bittrexBalanceLimits)) {
+                lowLimitBalances.add(actualBalance);
+            }
+        }
+        return lowLimitBalances;
+    }
+
+    private static boolean balanceLowerThanLimit(Balance balance, BittrexBalanceLimits establishedLimits) {
+        Map<String, BigDecimal> limits = establishedLimits.getLimits();
+        for (String currency : limits.keySet()) {
+            if (balance.getCurrency().equals(currency) && balance.getBalance().compareTo(limits.get(currency)) < 0) {
                 return true;
             }
         }
