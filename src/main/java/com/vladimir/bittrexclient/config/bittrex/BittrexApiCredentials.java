@@ -1,11 +1,9 @@
 package com.vladimir.bittrexclient.config.bittrex;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@PropertySource("classpath:application.properties")
+@Component
 @ConfigurationProperties(prefix = "bittrex")
 public class BittrexApiCredentials {
     private String apiKey;

@@ -5,7 +5,6 @@ import com.vladimir.bittrexclient.model.bittrex.*;
 import com.vladimir.bittrexclient.model.BittrexResult;
 import com.vladimir.bittrexclient.service.BittrexConsumerService;
 import com.vladimir.bittrexclient.config.bittrex.BittrexApiCredentials;
-import com.vladimir.bittrexclient.service.TwilioNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +24,7 @@ public class BittrexRequestController {
     public BittrexResult<List<Balance>> getAllBalances() {
         return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
         });
+
     }
 
     @RequestMapping("/balances/{currency}")

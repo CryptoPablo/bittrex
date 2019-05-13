@@ -1,5 +1,4 @@
 package com.vladimir.bittrexclient.controller;
 
-public class BalanceNotificationController {
-    
+public class AppController {
 }
