@@ -16,12 +16,12 @@ public class NotificationSender {
     private TwilioNotificationService twilioNotificationService;
     private List<Balance> balances;
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(cron = "${bittrex.request.fixedDelay.in.cron}")
     public void checkBittrexBalances() {
         balances = bittrexRequestController.getAllBalances().getResult();
     }
 
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(cron = "${bittrex.notification.fixedDelay.in.cron}")
     public void sendNotification(){
         twilioNotificationService.sendNotification(balances);
     }

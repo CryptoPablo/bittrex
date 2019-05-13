@@ -43,13 +43,10 @@ public class BittrexConsumerService {
         httpHeaders.set("Accept", MediaType.APPLICATION_JSON_VALUE);
         HttpEntity entity = new HttpEntity(httpHeaders);
 
-        restTemplate.setErrorHandler(new CutstomResponseErrorHandler());
-
         ParameterizedTypeReference<BittrexResult<T>> responseTypeRef = ParameterizedTypeReferenceBuilder.fromTypeToken(new TypeToken<BittrexResult<T>>() {}.where(new TypeParameter<>() {}, type));
 
         ResponseEntity<BittrexResult<T>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseTypeRef);
 
         return responseEntity.getBody();
     }
-
 }

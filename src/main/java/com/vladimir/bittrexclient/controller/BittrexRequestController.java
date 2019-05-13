@@ -21,7 +21,6 @@ public class BittrexRequestController {
     @Autowired
     private BittrexApiCredentials bittrexApiCredentials;
 
-
     @RequestMapping("/balances")
     public BittrexResult<List<Balance>> getAllBalances() {
         return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getbalances", null, null, new TypeToken<List<Balance>>() {
