@@ -25,7 +25,6 @@ public class NotificationSenderService {
             lowLimitBalances = twilioNotificationService.findLowLimitBalances(actualBalances);
             if (!lowLimitBalances.isEmpty()) {
                 twilioNotificationService.sendNotification(lowLimitBalances);
-                addressRefilled = false;
             }
             addressRefilled = isAddressRefilled(actualBalances, lowLimitBalances);
         }
