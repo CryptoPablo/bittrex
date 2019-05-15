@@ -1,6 +1,7 @@
 package com.vladimir.bittrexclient.service;
 
 import com.vladimir.bittrexclient.config.bittrex.BittrexNotificationLimits;
+import com.vladimir.bittrexclient.config.twilio.TwilioMessageHandler;
 import com.vladimir.bittrexclient.controller.BittrexRequestController;
 import com.vladimir.bittrexclient.model.bittrex.Balance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,14 @@ public class NotificationSenderService {
     @Autowired
     private BittrexRequestController bittrexRequestController;
     @Autowired
-    private TwilioNotificationService twilioNotificationService;
+    private TwilioMessageHandler twilioMessageHandler;
     @Autowired
     private BittrexNotificationLimits bittrexNotificationLimits;
 
     @Scheduled(cron = "${bittrex.request.fixedDelay.in.cron}")
     public void checkBalancesAndSendNotification() {
         List<Balance> actualBalances = bittrexRequestController.getAllBalances().getResult();
-        twilioNotificationService.sendNotification(actualBalances, bittrexNotificationLimits);
+        twilioMessageHandler.sendNotification(actualBalances, bittrexNotificationLimits);
     }
 }
 
