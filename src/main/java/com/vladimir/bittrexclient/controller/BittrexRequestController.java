@@ -86,5 +86,11 @@ public class BittrexRequestController {
         return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", "currency", currency, new TypeToken<List<DepositHistoryEntry>>() {
         });
     }
+
+    @RequestMapping("/sometest")
+    public BittrexResult<List<Balance>> getTest(){
+        return bittrexConsumerService.test(new TypeToken<List<Balance>>() {
+        });
+    }
 }
 
