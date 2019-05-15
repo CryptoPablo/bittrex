@@ -1,8 +1,8 @@
 package com.vladimir.bittrexclient.service;
 
-import com.vladimir.bittrexclient.config.twilio.NotificationLimits;
+import com.vladimir.bittrexclient.config.bittrex.BittrexNotificationLimits;
 import com.vladimir.bittrexclient.config.twilio.TwilioMessageStatusHandler;
-import com.vladimir.bittrexclient.config.twilio.TwilioReceivers;
+import com.vladimir.bittrexclient.config.twilio.TwilioMessageReceivers;
 import com.vladimir.bittrexclient.config.twilio.TwilioClient;
 import com.vladimir.bittrexclient.model.bittrex.Balance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ public class TwilioNotificationService {
     @Autowired
     private TwilioClient twilioClient;
     @Autowired
-    private TwilioReceivers twilioReceivers;
+    private TwilioMessageReceivers twilioMessageReceivers;
     @Autowired
     private TwilioMessageStatusHandler twilioMessageStatusHandler;
 
-    public void sendNotification(List<Balance> actualBalances, NotificationLimits establishedLimits) {
+    public void sendNotification(List<Balance> actualBalances, BittrexNotificationLimits establishedLimits) {
         Map<String, BigDecimal> limits = establishedLimits.getLimits();
         for (Balance actualBalance : actualBalances) {
             for (String currency : limits.keySet()) {
@@ -40,7 +40,7 @@ public class TwilioNotificationService {
     }
 
     private void sentNotificationToLowLimitBalance(Balance balance) {
-        for (String receiver : twilioReceivers.getAllMessageReceivers()) {
+        for (String receiver : twilioMessageReceivers.getAllMessageReceivers()) {
             twilioClient.sendMessage(receiver, generateMessage(balance));
         }
     }

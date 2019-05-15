@@ -75,6 +75,5 @@ public class BittrexRequestController {
     public BittrexResult<List<DepositHistoryEntry>> getDepositHistoryByCurrency(@PathVariable(name = "currency") String currency) {
         return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getdeposithistory", "currency", currency, new TypeToken<List<DepositHistoryEntry>>() {});
     }
-
 }
 

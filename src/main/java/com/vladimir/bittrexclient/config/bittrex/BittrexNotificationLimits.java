@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.config.twilio;
+package com.vladimir.bittrexclient.config.bittrex;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Component
 @ConfigurationProperties("bittrex.notification.limits")
-public class NotificationLimits {
+public class BittrexNotificationLimits {
     @Value("#{${bittrex.notification.limits}}")
     private Map<String, BigDecimal> establishedLimits;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 @ConfigurationProperties(prefix = "twilio.sms.receivers")
-public class TwilioReceivers {
+public class TwilioMessageReceivers {
     @Value("#{'${twilio.sms.receivers}'.split(',')}")
     private List<String> messageReceivers;
 
