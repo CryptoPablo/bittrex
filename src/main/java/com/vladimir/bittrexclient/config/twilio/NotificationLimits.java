@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 @Component
-@ConfigurationProperties("bittrex.balance.limits")
+@ConfigurationProperties("bittrex.notification.limits")
 public class NotificationLimits {
-    @Value("#{${bittrex.balance.limits}}")
+    @Value("#{${bittrex.notification.limits}}")
     private Map<String, BigDecimal> establishedLimits;
 
     public Map<String, BigDecimal> getLimits() {
