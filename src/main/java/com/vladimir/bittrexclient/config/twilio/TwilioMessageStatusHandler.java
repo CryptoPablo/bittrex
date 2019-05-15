@@ -14,20 +14,20 @@ public class TwilioMessageStatusHandler {
     private NotificationLimits notificationLimits;
     private Map<String, Boolean> statusMap;
 
-    public boolean getSmsStatusByCurrency(String currency) {
-        return statusMap.get(currency);
+    public boolean getMessageStatusByElement(String element) {
+        return statusMap.get(element);
 
     }
 
-    public void setSmsStatusToCurrency(String currency, boolean smsSent) {
-        statusMap.put(currency, smsSent);
+    public void setMessageStatusToElement(String element, boolean smsSent) {
+        statusMap.put(element, smsSent);
     }
 
     @EventListener(ContextRefreshedEvent.class)
-    public void generateSmsStatusMap() {
+    public void generateMessageStatusMap() {
         statusMap = new HashMap<>();
-        for (String currency : notificationLimits.getLimits().keySet()) {
-            statusMap.put(currency, false);
+        for (String element : notificationLimits.getLimits().keySet()) {
+            statusMap.put(element, false);
         }
     }
 }

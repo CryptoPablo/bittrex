@@ -27,12 +27,12 @@ public class TwilioNotificationService {
             for (String currency : limits.keySet()) {
                 if (actualBalance.getCurrency().equals(currency)) {
                     if (actualBalance.getBalance().compareTo(establishedLimits.getLimits().get(currency)) < 0) {
-                        if (!twilioMessageStatusHandler.getSmsStatusByCurrency(currency)) {
+                        if (!twilioMessageStatusHandler.getMessageStatusByElement(currency)) {
                             sentNotificationToLowLimitBalance(actualBalance);
                         }
-                        twilioMessageStatusHandler.setSmsStatusToCurrency(currency, true);
+                        twilioMessageStatusHandler.setMessageStatusToElement(currency, true);
                     } else {
-                        twilioMessageStatusHandler.setSmsStatusToCurrency(currency, false);
+                        twilioMessageStatusHandler.setMessageStatusToElement(currency, false);
                     }
                 }
             }
