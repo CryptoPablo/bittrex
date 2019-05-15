@@ -1,6 +1,6 @@
 package com.vladimir.bittrexclient.service;
 
-import com.vladimir.bittrexclient.config.bittrex.NotificationLimits;
+import com.vladimir.bittrexclient.config.twilio.NotificationLimits;
 import com.vladimir.bittrexclient.config.twilio.TwilioMessageStatusHandler;
 import com.vladimir.bittrexclient.config.twilio.TwilioReceivers;
 import com.vladimir.bittrexclient.config.twilio.TwilioClient;
@@ -40,7 +40,7 @@ public class TwilioNotificationService {
     }
 
     private void sentNotificationToLowLimitBalance(Balance balance) {
-        for (String receiver : twilioReceivers.getAllReceivers()) {
+        for (String receiver : twilioReceivers.getAllMessageReceivers()) {
             twilioClient.sendMessage(receiver, generateMessage(balance));
         }
     }

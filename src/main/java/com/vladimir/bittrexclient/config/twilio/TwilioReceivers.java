@@ -10,9 +10,9 @@ import java.util.List;
 @ConfigurationProperties(prefix = "twilio.sms.receivers")
 public class TwilioReceivers {
     @Value("#{'${twilio.sms.receivers}'.split(',')}")
-    private List<String> receivers;
+    private List<String> messageReceivers;
 
-    public List<String> getAllReceivers(){
-        return receivers;
+    public List<String> getAllMessageReceivers(){
+        return messageReceivers;
     }
 }

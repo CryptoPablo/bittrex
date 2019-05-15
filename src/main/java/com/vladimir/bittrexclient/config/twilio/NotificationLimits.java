@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.config.bittrex;
+package com.vladimir.bittrexclient.config.twilio;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
