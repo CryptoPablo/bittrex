@@ -9,11 +9,12 @@ import java.util.Map;
 
 @Component
 @ConfigurationProperties("bittrex.notification.limits")
-public class BittrexNotificationLimits {
+public class BalanceNotificationLimits {
     @Value("#{${bittrex.notification.limits}}")
     private Map<String, BigDecimal> establishedLimits;
 
-    public Map<String, BigDecimal> getLimits() {
+    public Map<String, BigDecimal> getAllLimits() {
         return establishedLimits;
     }
 }
+
