@@ -1,4 +1,4 @@
-package com.vladimir.bittrexclient.config.notifications;
+package com.vladimir.bittrexclient.service;
 
 import org.springframework.stereotype.Service;
 

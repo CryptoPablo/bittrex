@@ -1,7 +1,7 @@
 package com.vladimir.bittrexclient.config.twilio;
 
 import com.twilio.http.TwilioRestClient;
-import com.vladimir.bittrexclient.config.notifications.NotificationService;
+import com.vladimir.bittrexclient.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -57,7 +56,7 @@ public class BittrexRequestController {
     }
 
     @RequestMapping("/withdrawal-history")
-    public BittrexResult<List<WithdrawalHistoryEntry>> getWithdrawalHistory() throws IOException {
+    public BittrexResult<List<WithdrawalHistoryEntry>> getWithdrawalHistory() {
         return bittrexConsumerService.makeRequest(bittrexApiCredentials, "account", "getwithdrawalhistory", null, null, new TypeToken<List<WithdrawalHistoryEntry>>() {});
     }
 

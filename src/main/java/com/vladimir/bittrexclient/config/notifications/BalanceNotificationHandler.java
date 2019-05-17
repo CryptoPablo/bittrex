@@ -1,6 +1,7 @@
 package com.vladimir.bittrexclient.config.notifications;
 
 import com.vladimir.bittrexclient.model.bittrex.Balance;
+import com.vladimir.bittrexclient.service.NotificationService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
