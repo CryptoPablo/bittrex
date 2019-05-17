@@ -1,6 +1,5 @@
-package com.vladimir.bittrexclient.config.twilio;
+package com.vladimir.bittrexclient.config.notifications;
 
-import com.vladimir.bittrexclient.config.bittrex.BalanceNotificationLimits;
 import com.vladimir.bittrexclient.model.bittrex.Balance;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +13,7 @@ public class BalanceNotificationHandler {
     public BalanceNotificationHandler(BalanceNotificationLimits notificationLimits) {
         generateBalanceNotificationStatuses(notificationLimits.getAllLimits());
     }
+
     private static Map<String, Boolean> notificationStatuses = new HashMap<>();
 
     public void sendNotificationToLowLimitBalances(NotificationService notificationService, List<String> notificationRecipients, List<Balance> balances, Map<String, BigDecimal> balanceNotificationLimits) {

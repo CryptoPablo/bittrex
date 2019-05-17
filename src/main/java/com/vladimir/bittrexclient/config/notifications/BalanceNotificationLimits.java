@@ -1,16 +1,14 @@
-package com.vladimir.bittrexclient.config.bittrex;
+package com.vladimir.bittrexclient.config.notifications;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 @Component
-@ConfigurationProperties("bittrex.notification.limits")
 public class BalanceNotificationLimits {
-    @Value("#{${bittrex.notification.limits}}")
+    @Value("#{${bittrex.balance.notification.limits}}")
     private Map<String, BigDecimal> establishedLimits;
 
     public Map<String, BigDecimal> getAllLimits() {
