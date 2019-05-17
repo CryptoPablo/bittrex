@@ -30,7 +30,7 @@ public class MessageSenderService {
     @Scheduled(cron = "${bittrex.request.fixedDelay.in.cron}")
     public void checkBalancesAndSendNotification() {
         List<Balance> actualBalances = bittrexRequestController.getAllBalances().getResult();
-        balanceNotificationHandler.sendNotificationToLowLimitBalances(twilioClient, notificationRecipients.getAllRecipients(), actualBalances, balanceNotificationLimits.getAllLimits());
+        balanceNotificationHandler.sendLowLimitBalanceNotification(twilioClient, notificationRecipients.getAllRecipients(), actualBalances, balanceNotificationLimits.getAllLimits());
     }
 }
 
